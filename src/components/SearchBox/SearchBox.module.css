@@ -1,0 +1,12 @@
+.inputFindForm {
+  margin-bottom: 16px;
+}
+.inputTitle {
+  color: black;
+  display: flex;
+  align-items: start;
+}
+.input {
+  width: 96%;
+  color: black;
+}
