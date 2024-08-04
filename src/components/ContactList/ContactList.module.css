@@ -10,6 +10,8 @@
   align-items: start;
   max-height: 200px;
   gap: 8px;
+  box-shadow: 0 0 8px rgba(206, 17, 105, 0.5);
+  transition: box-shadow 0.3s ease;
 }
 p {
   margin: 0;
@@ -25,6 +27,11 @@ p {
   cursor: pointer;
   border: 1px solid black;
   border-radius: 4px;
+}
+.deleteBtn:hover,
+.deleteBtn:focus {
+  background-color: rgb(206, 17, 105);
+  border-color: rgb(206, 17, 105);
 }
 .number,
 .name {

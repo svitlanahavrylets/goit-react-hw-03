@@ -3,26 +3,26 @@ import * as Yup from "yup";
 import css from "./ContactForm.module.css";
 
 const INITIAL_VALUES = {
-  contactName: "",
-  contactNumber: "",
+  name: "",
+  number: "",
 };
 
 const phoneRegExp = /^[0-9]{3}-[0-9]{2}-[0-9]{2}$/;
 
 const ContactValidationSchema = Yup.object().shape({
-  contactName: Yup.string()
+  name: Yup.string()
     .required("Required")
     .min(3, "Too Short!")
     .max(50, "Too Long!"),
-  contactNumber: Yup.string()
+  number: Yup.string()
     .matches(phoneRegExp, "The phone number must match the format 'xxx-xx-xx'")
     .required("Required"),
 });
 const ContactForm = ({ onAddContact }) => {
   const handleSubmit = (values, actions) => {
     const contactObject = {
-      name: values.contactName,
-      number: values.contactNumber,
+      name: values.name,
+      number: values.number,
     };
     onAddContact(contactObject);
 
@@ -30,31 +30,45 @@ const ContactForm = ({ onAddContact }) => {
   };
   return (
     <Formik
-      initialValues={{ INITIAL_VALUES }}
+      initialValues={INITIAL_VALUES}
       onSubmit={handleSubmit}
       validationSchema={ContactValidationSchema}
     >
       {({ errors }) => (
-        <Form>
-          <label>
-            <span>Name</span>
-            <Field type="text" name="contactName" placeholder="" />
+        <Form className={css.form}>
+          <label className={css.label}>
+            <span className={css.name}>Name</span>
+            <Field
+              className={css.field}
+              type="text"
+              name="name"
+              placeholder=""
+            />
             <ErrorMessage
               className={css.errorText}
-              name="contactName"
+              name="name"
               component="span"
             />
           </label>
-          <label>
-            <span>Phone</span>
-            <Field type="tel" name="contactNumber" placeholder="" />
+          <label className={css.label}>
+            <span className={css.number}>Phone</span>
+            <Field
+              className={css.field}
+              type="tel"
+              name="number"
+              placeholder=""
+            />
             <ErrorMessage
               className={css.errorText}
-              name="contactNumber"
+              name="number"
               component="span"
             />
           </label>
-          <button disabled={Object.keys(errors).length > 0} type="submit">
+          <button
+            className={css.btnAddContact}
+            disabled={Object.keys(errors).length > 0}
+            type="submit"
+          >
             Add contact
           </button>
         </Form>
