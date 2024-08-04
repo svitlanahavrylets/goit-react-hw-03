@@ -1,7 +1,11 @@
 import "./App.css";
+
 import { useState } from "react";
+import { nanoid } from "nanoid";
+
 import ContactList from "./components/ContactList/ContactList";
 import SearchBox from "./components/SearchBox/SearchBox";
+import ContactForm from "./components/ContactForm/ContactForm";
 
 function App() {
   const [users, setUsers] = useState([
@@ -22,10 +26,19 @@ function App() {
   const onDeleteProfile = (profileId) => {
     setUsers(users.filter((user) => user.id !== profileId));
   };
+  const onAddContact = (user) => {
+    const finalUser = {
+      ...user,
+      id: nanoid(),
+    };
+
+    setUsers([finalUser, ...users]);
+  };
+
   return (
     <div>
       <h1 className="title">Phonebook</h1>
-      {/* <ContactForm /> */}
+      <ContactForm onAddContact={onAddContact} />
       <SearchBox filterValue={filterValue} handleFilter={handleFilter} />
 
       {filteredContacts.map((user) => {
