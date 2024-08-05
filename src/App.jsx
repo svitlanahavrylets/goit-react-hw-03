@@ -32,6 +32,7 @@ function App() {
   const filteredContacts = users.filter((user) =>
     user.name.toLocaleLowerCase().includes(filterValue.toLocaleLowerCase())
   );
+
   const onDeleteContact = (contactId) => {
     setUsers(users.filter((user) => user.id !== contactId));
   };
@@ -49,18 +50,10 @@ function App() {
       <h1 className="title">Phonebook</h1>
       <ContactForm onAddContact={onAddContact} />
       <SearchBox filterValue={filterValue} handleFilter={handleFilter} />
-
-      {filteredContacts.map((user) => {
-        return (
-          <ContactList
-            key={user.id}
-            id={user.id}
-            name={user.name}
-            number={user.number}
-            onDeleteContact={onDeleteContact}
-          />
-        );
-      })}
+      <ContactList
+        contacts={filteredContacts}
+        onDeleteContact={onDeleteContact}
+      />
     </div>
   );
 }

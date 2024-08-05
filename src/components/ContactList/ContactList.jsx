@@ -1,26 +1,22 @@
-import css from "./ContactList.module.css";
-import { IoPersonSharp } from "react-icons/io5";
-import { FaPhoneAlt } from "react-icons/fa";
+// import css from "./ContactList.module.css";
+import Contact from "../Contact/Contact";
 
-const ContactList = ({ id, name, number, onDeleteContact }) => {
+const ContactList = ({ contacts, onDeleteContact }) => {
   return (
-    <div className={css.contactList}>
-      <p className={css.name}>
-        <IoPersonSharp />
-        {name}
-      </p>
-      <p className={css.number}>
-        <FaPhoneAlt />
-        {number}
-      </p>
-      <button
-        onClick={() => onDeleteContact(id)}
-        type="button"
-        className={css.deleteBtn}
-      >
-        Delete
-      </button>
-    </div>
+    <ul>
+      {contacts.map((contact) => {
+        return (
+          <li key={contact.id}>
+            <Contact
+              id={contact.id}
+              name={contact.name}
+              number={contact.number}
+              onDeleteContact={onDeleteContact}
+            />
+          </li>
+        );
+      })}
+    </ul>
   );
 };
 export default ContactList;
